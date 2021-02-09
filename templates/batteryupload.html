@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dark Bootstrap Admin </title>
+    <meta name="description" content="">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="{% static 'css/font.css' %}">
+     <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <script>
+       $(document).ready(function () {
+    $('#txtDate').datepicker();
+    $('#follow_Date').datepicker();
+});
+
+function getdate() {
+    var tt = document.getElementById('txtDate').value;
+
+    var date = new Date(tt);
+    var newdate = new Date(date);
+    var days=document.getElementById('dur').value;
+    if (days==1) {
+        newdate.setDate(newdate.getDate() + 30);
+  } else if (days==2) {
+    newdate.setDate(newdate.getDate() + 60);
+  }
+  else if (days==3) {
+    newdate.setDate(newdate.getDate() + 90);
+  }else if (days==4) {
+    newdate.setDate(newdate.getDate() + 120);
+  } else if (days==5) {
+    newdate.setDate(newdate.getDate() + 150);
+  }  else {
+    newdate.setDate(newdate.getDate() + 180);
+  }
+
+
+
+    var dd = newdate.getDate();
+    var mm = newdate.getMonth() + 1;
+    var y = newdate.getFullYear();
+
+    var someFormattedDate = dd + '/' + mm + '/' + y;
+    document.getElementById('follow_Date').value = someFormattedDate;
+}
+    </script>
+
+
+       <script>
+    $(document).ready(function () {
+        $('#txtDate').datepicker();
+        $('#follow_Date2').datepicker();
+    });
+
+    function getdate2() {
+        var tt = document.getElementById('txtDate').value;
+
+        var date = new Date(tt);
+        var newdate = new Date(date);
+        var dayss=parseInt(document.getElementById("add").value);
+
+        newdate.setDate(newdate.getDate() +dayss);
+
+        var dd = newdate.getDate();
+        var mm = newdate.getMonth() + 1;
+        var y = newdate.getFullYear();
+
+        var someFormattedDate = dd + '/' + mm+ '/' + y;
+        document.getElementById('follow_Date2').value = someFormattedDate;
+    }
+</script>
+
+
+  </head>
+  <body>
+    <header class="header">   
+      <nav class="navbar navbar-expand-lg">
+        <div class="search-panel">
+          <div class="search-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn">Close <i class="fa fa-close"></i></div>
+            <form id="binput" action="#">
+              <div class="form-group">
+                <input type="search" name="search" placeholder="What are you searching for...">
+                <button type="submit" class="submit">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+          <div class="navbar-header">
+            <!-- Navbar Header--><a href="index.html" class="navbar-brand">
+              <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Exide</strong><strong>Admin</strong></div>
+              <div class="brand-text brand-sm"><strong class="text-primary">E</strong><strong>A</strong></div></a>
+            <!-- Sidebar Toggle Btn-->
+            <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+          </div>
+          
+                 
+        </div>                  
+        <form action="logoutadmin" method="POST">
+          {% csrf_token %}
+
+      <div class="list-inline-item "><a><input type="submit" value="Logout" class="btn btn-block bg-danger text-white" ></a></div>
+    </form> 
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+      <!-- Sidebar Navigation-->
+      <nav id="sidebar">
+        <!-- Sidebar Header-->
+        <div class="sidebar-header d-flex align-items-center">
+          <div class="avatar"><img src="{% static 'img/avatar-6.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+          <div class="title">
+            <h1 class="h5">Shafeeq</h1>
+            <p>Shop owner</p>
+          </div>
+        </div>
+        <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+        <ul class="list-unstyled">
+          <li><a href="purchaseinput"> <i class="icon-home"></i>Input purchase details</a></li>
+          <li><a href="tables"> <i class="icon-grid"></i>Tables </a></li>
+          <li><a href="retrievebdeatils"> <i class="fa fa-bar-chart"></i>retrive buyer details</a></li>
+          <li  class="active"><a href="batteryuploadpage"> <i class="icon-padnote"></i>Gallery </a></li>
+          <li><a href="gallerymanage"> <i class="icon-padnote"></i>Gallery Management </a></li>
+          <li><a href="userdetails"> <i class="fa fa-bar-chart"></i>Users List</a></li> 
+        
+      </nav>
+      <!-- Sidebar Navigation end-->
+      <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+          <div class="container-fluid">
+            <h2 class="h5 no-margin-bottom">Tables</h2>
+          </div>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Tables            </li>
+          </ul>
+        </div>
+        <section class="no-padding-top">
+          <div class="container-fluid">
+            <div class="row">
+              
+              </div>
+              <div class="col-sm-12">
+                <div class="block margin-bottom-sm">
+                  <div class="title"><strong>Details of battery to show in gallery page</strong></div>
+                  <div class="table-responsive"> 
+                    <form action="bgalleryup" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group ">
+                            <label for="email">Battery image:</label>
+                            <input type="file" class="form-control"  placeholder="#sew2456" name="bimg">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Battery name:</label>
+                           <input type="text" class="form-control"  placeholder="#sew2456" name="banme">
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Battery description</label>
+                         <input type="text" class="form-control"  placeholder="eg:john" name="bdesc">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Vehichle type</label>
+                        <select class="form-control" id="sel1" name="btype">
+                            <option value="Car">Car</option>
+                            <option value="bike">Bike</option>
+                            
+                          </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Fuel type</label>
+                        <select class="form-control" id="sel1" name="ftype">
+                            <option value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                            
+                          </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Battery Voltage:</label>
+                       <input type="text" class="form-control" placeholder="10 digit mobile no" name="bvolt">
+                    </div>
+
+                        <div class="form-group">
+                          <label for="pwd">Battery price:</label>
+                         <input type="text" class="form-control" placeholder="in RS" name="bprize">
+                      </div>
+                     
+                       
+                        
+                    <button type="submit" class="btn btn-danger btn-block">Submit</button>
+                </form>
+                  </div>
+                </div>
+              </div>
+              
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class="footer">
+          <div class="footer__block block no-margin-bottom">
+            <div class="container-fluid text-center">
+              
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/front.js' %}"></script>
+  </body>
+</html>

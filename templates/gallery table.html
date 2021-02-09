@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dark Bootstrap Admin </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="{% static 'css/font.css' %}">
+   <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <header class="header">   
+      <nav class="navbar navbar-expand-lg">
+        <div class="search-panel">
+          <div class="search-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn">Close <i class="fa fa-close"></i></div>
+            <form id="searchForm" action="#">
+              <div class="form-group">
+                <input type="search" name="search" placeholder="What are you searching for...">
+                <button type="submit" class="submit">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+          <div class="navbar-header">
+            <!-- Navbar Header--><a href="index.html" class="navbar-brand">
+              <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Exide</strong><strong>Admin</strong></div>
+              <div class="brand-text brand-sm"><strong class="text-primary">E</strong><strong>A</strong></div></a>
+            <!-- Sidebar Toggle Btn-->
+            <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+          </div>
+          
+                 
+        </div>  <form action="logoutadmin" method="POST">
+          {% csrf_token %}
+
+      <div class="list-inline-item "><a><input type="submit" value="Logout" class="btn btn-block bg-danger text-white" ></a></div>
+    </form> 
+  </div>
+        </div>
+      </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+      <!-- Sidebar Navigation-->
+      <nav id="sidebar">
+        <!-- Sidebar Header-->
+        <div class="sidebar-header d-flex align-items-center">
+          <div class="avatar"><img src="{% static 'img/avatar-6.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+          <div class="title">
+            <h1 class="h5">Shafeeq</h1>
+            <p>Shop owner</p>
+          </div>
+        </div>
+        <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+        <ul class="list-unstyled">
+          <li><a href="purchaseinput"> <i class="icon-home"></i>Input purchase details</a></li>
+          <li ><a href="tables"> <i class="icon-grid"></i>Tables </a></li>
+          <li><a href="retrievebdeatils"> <i class="fa fa-bar-chart"></i>retrive buyer details</a></li>
+          <li><a href="batteryuploadpage"> <i class="icon-padnote"></i>Gallery </a></li>
+          <li class="active"><a href="gallerymanage"> <i class="icon-padnote"></i>Gallery Management </a></li>
+          <li><a href="userdetails"> <i class="fa fa-bar-chart"></i>Users List</a></li>  
+          
+        
+        </ul> </nav>
+      <!-- Sidebar Navigation end-->
+      <div class="page-content">
+        <!-- Page Header-->
+        <div class="page-header no-margin-bottom">
+          <div class="container-fluid">
+            <h2 class="h5 no-margin-bottom">Tables</h2>
+          </div>
+        </div>
+        <!-- Breadcrumb-->
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Tables            </li>
+          </ul>
+        </div>
+        <section class="no-padding-top">
+          <div class="container-fluid">
+            <div class="row">
+              
+              </div>
+              <div class="col-sm-12">
+                <div class="block margin-bottom-sm">
+                  <div class="title"><strong>Striped Table</strong></div>
+                  <div class="table-responsive"> 
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Battery image</th>
+                          <th>Battery name</th>
+                          <th>Battery description</th>
+                          <th>Vehichle type</th>
+                          <th>Fuel Type</th>
+                          <th>Voltage</th>
+                          <th>Prize</th>
+                          <th>Status </th>
+                          <th>change Status</th>
+                          
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in x %}
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>{{i.bimage.url}}<img src="{{i.bimage.url}}"></td>
+                          <td>{{i.bname}}</td>
+                          <td>{{i.bdesc}}</td>
+                          <td>{{i.vtype}}</td>
+                          <td>{{i.ftype}}</td>
+                          <td>{{i.bvoltage}}</td>
+                          <td>{{i.bprice}}</td>
+                           <td>{{i.status}}</td>
+                        
+                          
+                          
+                          <form method="POST" action="gmupdate">
+                              {% csrf_token %}
+                          <td><select class="form-control" id="sta" name="st">
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                          </select></td>
+                          <td><input type="submit"></td>
+                          <td><input name="bname" value="{{i.bname}}"></td>
+                        </form>
+                        </tr>
+                        {% endfor %}
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+                  </div>
+        </section>
+                </div>
+               </d>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class="footer">
+          <div class="footer__block block no-margin-bottom">
+            <div class="container-fluid text-center">
+              
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/popper.js/umd/popper.min.js' %}"> </script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}"> </script>
+    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/front.js' %}"></script>
+  </body>
+</html>
